@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "CSS Playground"
+version = "1.0.0"
+id = "artifacts/css-playground"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21780
+
+[services.development]
+run = "pnpm --filter @workspace/css-playground run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/css-playground", "run", "build" ]
+publicDir = "artifacts/css-playground/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21780"
+BASE_PATH = "/"
